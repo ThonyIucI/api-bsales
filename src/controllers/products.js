@@ -10,7 +10,7 @@ const getProducts = async (req, res) => {
     if (!Array.isArray(response)) {
       // console.log(response);
       // return res.send({ msg: response.msg }).status(response.status);
-      return res.status(response.status).send({ msg: `${response.msg}` });
+      return res.status(response.status).send(`${response.msg}`);
     }
     res.send(response);
   } catch (error) {
