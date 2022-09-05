@@ -7,8 +7,10 @@ const getProducts = async (req, res) => {
   let response;
   try {
     response = await filterProducs(name, category, pMin, pMax, dMin, dMax);
-    if (!Array.isArray(response))
-      return res.status(response.status).send(response.msg);
+    if (!Array.isArray(response)) {
+      // console.log(response);
+      return res.send({ msg: response.msg }).status(response.status);
+    }
     res.send(response);
   } catch (error) {
     res.status(500).send({ msg: `Could not find any products, ${error}` });
@@ -31,7 +33,7 @@ const getDiscounts = async (req, res) => {
     if (!disconts.length)
       return res
         .status(404)
-        .send({ msg: `There is no any discount available or its cero` });
+        .json({ msg: `There is no any discount available or its cero` });
 
     res.send(disconts);
   } catch (error) {
