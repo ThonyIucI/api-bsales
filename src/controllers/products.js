@@ -3,13 +3,14 @@ import { modelProduct } from '../models/index.js';
 
 const getProducts = async (req, res) => {
   const { name, category, pMin, pMax, dMin, dMax } = req.body;
-  console.log(req.body);
+
   let response;
   try {
     response = await filterProducs(name, category, pMin, pMax, dMin, dMax);
     if (!Array.isArray(response)) {
       // console.log(response);
-      return res.send({ msg: response.msg }).status(response.status);
+      // return res.send({ msg: response.msg }).status(response.status);
+      return res.status(response.status).send({ msg: `${response.msg}` });
     }
     res.send(response);
   } catch (error) {
